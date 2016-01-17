@@ -11,7 +11,7 @@ class DMathParse {
         
     }
     
-    function dmathTagHook( $content, $attributes, $parser, $dad ) {
+    function dmathTagHook( $content, $attributes, $parser ) {
         
         $attributes['display'] = 'block';
         if ( array_key_exists( 'type', $attributes ) ) {
