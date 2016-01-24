@@ -13,6 +13,7 @@ class DMathParse {
         }
     
         $parser->setHook('dmath', 'DMathParse::dmathTagHook' );
+        $parser->setHook('math', 'DMathParse::mathTagHook' );
         
     }
     
@@ -23,8 +24,24 @@ class DMathParse {
             $tag = $attributes['type'];
             $content = ' \\begin{'.$tag.'} '.$content.'\\end{'.$tag.'}';
         }
-        return MathHooks::mathTagHook($content, $attributes, $parser);
+        $text = MathHooks::mathTagHook( $content, $attributes, $parser );
+    
+        $text[0] = Html::rawElement ('div', array( 'class' => 'math-wrapper' ), $text[0] );
+        
+        return $text;
     }
+    
+    function mathTagHook( $content, $attributes, $parser ) {
+                
+        $text = MathHooks::mathTagHook($content, $attributes, $parser);
+        
+        // the MathHooks::mathTagHooks function returns a array with some attributes, but we only want to change the text, which is at [0].
+        $text[0] = Html::rawElement( 'span', array( 'class' => 'math-wrapper' ), $text[0] );
+        
+        return $text;
+        
+    }
+    
 }
 
 ?>
