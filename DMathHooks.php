@@ -6,7 +6,7 @@ if (!defined('MEDIAWIKI')){
 
 class DMathParse {
     
-    function onParserFirstCallSetup(Parser $parser) {
+    static function onParserFirstCallSetup(Parser $parser) {
     
         if(!ExtensionRegistry::getInstance()->isLoaded('Math')) {
             die("The DMath extension requires the Math extension, please include it.");
